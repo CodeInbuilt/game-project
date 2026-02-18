@@ -1,0 +1,74 @@
+code- for moveobject and mixedcolor 
+# MixedScript (Unity C#)
+
+This script demonstrates a simple mixed-interaction system in Unity
+- Player movement using WASD  Arrow Keys
+- Clicking the object changes its color using Raycast + Input System
+
+## Features
+✔ Movement using transform.Translate  
+✔ Uses Input System package for mouse input  
+✔ Random color change on object click  
+✔ Clean structured methods (Movement + Interaction)
+
+## Requirements
+- Unity 2021+  
+- Input System package installed  
+- Main Camera required  
+
+## How to Use
+1. Attach MixedScript.cs to any 3D object.
+2. Ensure the object has a Renderer component.
+3. Add a Collider (Box Collider recommended).
+4. Press Play
+   - Move with W A S D or Arrow Keys
+   - Click the object to change its color
+
+## Code
+```csharp
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class MixedScript MonoBehaviour
+{
+    private Renderer rend;
+    public float moveSpeed = 10f;
+
+    void Start()
+    {
+        rend = GetComponentRenderer();
+    }
+
+    void Update()
+    {
+        HandleMovement();
+        HandleMouseClick();
+    }
+
+     ---------- MOVEMENT ----------
+    void HandleMovement()
+    {
+        float moveHorizontal = Input.GetAxis(Horizontal);
+        float moveVertical = Input.GetAxis(Vertical);
+
+        Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
+        transform.Translate(movement  moveSpeed  Time.deltaTime, Space.World);
+    }
+
+     ---------- COLOR CLICK ----------
+    void HandleMouseClick()
+    {
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.transform == transform)
+                {
+                    rend.material.color = Random.ColorHSV();
+                }
+            }
+        }
+    }
+}
