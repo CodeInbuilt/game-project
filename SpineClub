@@ -1,0 +1,20 @@
+created project 3d  
+game object handling club 
+for created scripty 
+code in c# in unity
+using UnityEngine;
+public class SpineClub: MonoBehaviour
+{
+    public Vector3 RotateAmount = new Vector3(0, 1, 0);
+    void Start()
+    {
+       
+    }
+
+    // Update is called once per frame
+    // Update is called once per frame
+void Update()
+{
+    transform.Rotate(RotateAmount);
+}
+}
