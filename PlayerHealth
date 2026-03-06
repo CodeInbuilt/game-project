@@ -1,0 +1,19 @@
+Learn the player's mode chat
+1. Base 3 side player, he is safe, no damage, okay manager mod, survival mod and game over 
+2. Use if and else learn tool health 
+
+Code:-
+function cheackPlayerHealth(health)
+    if health <= 0 then
+        return "PlayerDead","--Game Over"
+    elseif health < 30 then
+        return "low health","--survival mod"
+    elseif health < 50 then
+        return "medium health","--okay manager mod"
+    else
+        return"Player healthy","--player he safe no damage"
+    end
+end
+print("Enter Player Health:")
+local health =tonumber(io.read())
+print(cheackPlayerHealth(health))
